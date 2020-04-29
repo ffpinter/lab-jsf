@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+targetCompatibility = JavaVersion.VERSION_14
+sourceCompatibility = JavaVersion.VERSION_14
+
+group 'dev.pinter.webapp-skel'
+version '0.2'
+
+ext['payaraMicroVersion'] = '5.201'
+ext['projectPayaraDevPort'] = 8080
+
+repositories {
+    mavenCentral()
+    maven {
+        url "http://repository.primefaces.org"
+    }
+}
+
+dependencies {
+    implementation 'org.jdbi:jdbi3-sqlobject:3.18.0'
+    implementation 'org.apache.derby:derby:10.15.2.0'
+    implementation 'org.apache.derby:derbytools:10.15.2.0'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    implementation group: 'org.primefaces', name: 'primefaces', version: '8.0'
+    implementation group: 'org.glassfish', name: 'jakarta.faces', version: '2.3.14'
+    implementation group: 'org.primefaces.themes', name: 'all-themes', version: '1.0.10'
+
+    compileOnly "fish.payara.extras:payara-micro:"+payaraMicroVersion
+    compileOnly "fish.payara.extras:payara-embedded-all:"+payaraMicroVersion
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
+    providedRuntime('org.glassfish.jaxb:jaxb-runtime:2.3.0', 'javax.activation:activation:1.1.1', 'javax.xml.bind:jaxb-api:2.3.1')
+}
+
+task runMicro(type: Exec, dependsOn: war) {
+    afterEvaluate { Project project ->
+        def payaraJarPath = configurations
+                .compileOnly
+                .find { it.name =~ 'payara-micro-' + payaraMicroVersion + '.jar' }
+                .absolutePath
+        def warFile = war.archivePath
+        def payaraLibs = configurations.providedRuntime.findAll().join(File.pathSeparator)
+        commandLine(
+                System.getProperty('java.home') + '/bin/java',
+                "-Djavax.net.ssl.keyStore=${projectDir}/dist/localhost.jks",
+                '-Djavax.net.ssl.keyStorePassword=changeit',
+                '--add-modules', 'java.se',
+                '--add-exports', 'java.base/jdk.internal.ref=ALL-UNNAMED',
+                '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+                '--add-opens', 'java.base/java.nio=ALL-UNNAMED',
+                '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED',
+                '--add-opens', 'java.base/jdk.internal.loader=ALL-UNNAMED',
+                '--add-opens', 'java.management/sun.management=ALL-UNNAMED',
+                '--add-opens', 'jdk.management/com.sun.management.internal=ALL-UNNAMED',
+                '-jar', payaraJarPath,
+                '--sslcert','localhost',
+                '--sslport','8443',
+                '--rootDir', "${project.buildDir}/${project.name}-root",
+                '--deploy', warFile,
+                '--port', projectPayaraDevPort,
+                '--addlibs', payaraLibs,
+                '--addlibs', 'C:/Users/flavi/jars/derbytools-10.15.2.0.jar',
+                '--addlibs', 'C:/Users/flavi/jars/derby-10.15.2.0.jar',
+                '--addlibs', 'C:/Users/flavi/jars/derbyshared-10.15.2.0.jar')
+    }
+}
