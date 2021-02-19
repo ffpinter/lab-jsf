@@ -7,17 +7,31 @@
       xmlns="http://www.w3.org/1999/xhtml">
 <f:view locale="#{language.current}"/>
 <h:head>
-    <ui:insert name="htmlhead">
-        <ui:include src="/WEB-INF/templates/htmlhead.xhtml"/>
-    </ui:insert>
+    <h:outputStylesheet library="default" name="css/index.css" />
+    <title>
+        <ui:insert name="pageTitle">Tabela de jogos</ui:insert>
+    </title>
+<!--    <ui:insert name="htmlhead">-->
+<!--        <ui:include src="/WEB-INF/templates/htmlhead.xhtml"/>-->
+<!--    </ui:insert>-->
 </h:head>
 <h:body>
     <div>
         <h:outputText value="#{msg['helloWorld.message']}"/>
 
-        <ui:repeat value="#{dbAccess.gamesList}" var="game">
-            <h:outputText value="#{game.jogo}"/>
-        </ui:repeat>
+        <h:dataTable value="#{dbAccess.gamesList}" var="g" styleClass="tabela" headerClass="cabecalho"
+                     columnClasses="ultimo,primeiro">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                #{g.id}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Jogo</f:facet>
+                #{g.jogo}
+            </h:column>
+        </h:dataTable>
+
     </div>
 </h:body>
 </html>
