@@ -7,31 +7,31 @@
       xmlns="http://www.w3.org/1999/xhtml">
 <f:view locale="#{language.current}"/>
 <h:head>
-    <h:outputStylesheet library="default" name="css/index.css" />
+    <h:outputStylesheet library="default" name="css/index.css"/>
     <title>
         <ui:insert name="pageTitle">Tabela de jogos</ui:insert>
     </title>
-<!--    <ui:insert name="htmlhead">-->
-<!--        <ui:include src="/WEB-INF/templates/htmlhead.xhtml"/>-->
-<!--    </ui:insert>-->
+    <!--    <ui:insert name="htmlhead">-->
+    <!--        <ui:include src="/WEB-INF/templates/htmlhead.xhtml"/>-->
+    <!--    </ui:insert>-->
 </h:head>
 <h:body>
-    <div>
-        <h:outputText value="#{msg['helloWorld.message']}"/>
+    <h:panelGroup>
+        <h:form>
+            <!--            <h:outputText value="#{msg['helloWorld.message']}"/>-->
+            <p:dataTable value="#{dbAccess.gamesList}" var="g" reflow="true"
+                         rowStyleClass="cheap" styleClass="tabela">
+                <p:column styleClass="column-id">
+                    <f:facet name="header">Id</f:facet>
+                    #{g.id}
+                </p:column>
 
-        <h:dataTable value="#{dbAccess.gamesList}" var="g" styleClass="tabela" headerClass="cabecalho"
-                     columnClasses="ultimo,primeiro">
-            <h:column>
-                <f:facet name="header">Id</f:facet>
-                #{g.id}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Jogo</f:facet>
-                #{g.jogo}
-            </h:column>
-        </h:dataTable>
-
-    </div>
+                <p:column styleClass="column-jogo">
+                    <f:facet name="header">Jogo</f:facet>
+                    #{g.jogo}
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </h:panelGroup>
 </h:body>
 </html>

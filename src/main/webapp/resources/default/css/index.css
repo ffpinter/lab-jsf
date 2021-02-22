@@ -1,24 +1,15 @@
-.tabela {
-     border: 1px solid green;
+.cheap {
+        background-color: #0ab2c2 !important;
+        background-image: none !important;
+        color: #ffffff !important;
+        text-align:center;
+}
+.tabela{
+    width: 30% !important;
 }
 
-.cabecalho {
-   text-align: center;
-   font: 20px Arial, sans-serif;
-   font-weight: bold;
-   color: Snow;
-   background:  #008B45;
-
-}
-
-.primeiro {
-   text-align: center;
-   font: 20px Arial, sans-serif;
-   background: #A2CD5A;
-}
-
-.ultimo {
-   font: 20px Arial, sans-serif;
-   text-align: center;
-   background: #BCEE68;
+.column-id {
+    width: 32px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
