@@ -16,22 +16,27 @@
     <!--    </ui:insert>-->
 </h:head>
 <h:body>
-    <h:panelGroup>
-        <h:form>
-            <!--            <h:outputText value="#{msg['helloWorld.message']}"/>-->
-            <p:dataTable value="#{dbAccess.gamesList}" var="g" reflow="true"
-                         rowStyleClass="cheap" styleClass="tabela">
-                <p:column styleClass="column-id">
-                    <f:facet name="header">Id</f:facet>
-                    #{g.id}
-                </p:column>
+    <h:form id="form">
+        <!--            <h:outputText value="#{msg['helloWorld.message']}"/>-->
+        <p:growl id="erro"/>
+        <p:dataTable id="dtgames" value="#{dbAccess.gamesList}" var="g" reflow="true"
+                     rowStyleClass="cheap" styleClass="tabela">
+            <p:column styleClass="column-id">
+                <f:facet name="header">Id</f:facet>
+                #{g.id}
+            </p:column>
 
-                <p:column styleClass="column-jogo">
-                    <f:facet name="header">Jogo</f:facet>
-                    #{g.jogo}
-                </p:column>
-            </p:dataTable>
-        </h:form>
-    </h:panelGroup>
+            <p:column styleClass="column-jogo">
+                <f:facet name="header">Jogo</f:facet>
+                #{g.jogo}
+            </p:column>
+        </p:dataTable>
+<!-- ajax status -->
+        <p:outputLabel value="id: "/>
+        <p:inputNumber id="table-id" value="#{dbAccess.newId}"/>
+        <p:outputLabel value="jogo: "/>
+        <p:inputText id="table-jogo" value="#{dbAccess.newJogo}"/>
+        <p:commandButton value="Inserir" actionListener="#{dbAccess.updateGamesList}" update="form"/>
+    </h:form>
 </h:body>
 </html>

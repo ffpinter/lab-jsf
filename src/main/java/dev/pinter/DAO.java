@@ -1,7 +1,9 @@
 package dev.pinter;
 
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.JdbiException;
 import org.jdbi.v3.core.mapper.reflect.FieldMapper;
+
 import java.util.List;
 
 public class DAO {
@@ -11,11 +13,15 @@ public class DAO {
         System.setProperty("derby.system.home", "C:/Users/flavi/Documents/DERBYTUTOR/");
     }
 
-    public int updateTable(int id, String jogo) {
-        return jdbi.withHandle(handle -> handle.createUpdate("INSERT INTO GAME(ID, JOGO) VALUES (:ID, :JOGO)")
-                .bind("ID", id)
-                .bind("JOGO", jogo)
-                .execute());
+    public int updateTable(int id, String jogo) throws DataAccessException {
+        try {
+            return jdbi.withHandle(handle -> handle.createUpdate("INSERT INTO GAME(ID, JOGO) VALUES (:ID, :JOGO)")
+                    .bind("ID", id)
+                    .bind("JOGO", jogo)
+                    .execute());
+        } catch (JdbiException e){
+            throw new DataAccessException("Error ao inserir");
+        }
     }
 
     public List<Game> selectTable(String tablename) {
