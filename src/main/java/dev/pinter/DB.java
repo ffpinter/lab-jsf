@@ -12,7 +12,7 @@ import java.util.List;
 @ViewScoped
 public class DB implements Serializable {
     DAO dao = new DAO();
-    private final List<Game> gamesList;
+    private List<Game> gamesList;
 
     private int newId;
     private String newJogo;
@@ -36,15 +36,25 @@ public class DB implements Serializable {
 
     public DB() {
         gamesList = dao.selectTable("GAME");
+        int max = 0;
+        for (Game g: gamesList) {
+            if(g.getId() > max){
+                max = g.getId();
+                newId = max + 1;
+            }
+        }
     }
 
     public List<Game> getGamesList() {
         return gamesList;
     }
 
-    public void updateGamesList(ActionEvent event) {
+    public void insertGamesList(ActionEvent event) {
         try {
-            dao.updateTable(newId, newJogo);
+            dao.insertGame(newId, newJogo);
+            gamesList = dao.selectTable("GAME");
+            newId = 0;
+            newJogo = "";
         } catch (DataAccessException e) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir", null));

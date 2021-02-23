@@ -62,8 +62,8 @@ task runMicro(type: Exec, dependsOn: war) {
                 '--deploy', warFile,
                 '--port', projectPayaraDevPort,
                 '--addlibs', payaraLibs,
-                '--addlibs', 'C:/Users/flavi/jars/derbytools-10.15.2.0.jar',
-                '--addlibs', 'C:/Users/flavi/jars/derby-10.15.2.0.jar',
-                '--addlibs', 'C:/Users/flavi/jars/derbyshared-10.15.2.0.jar')
+                '--addlibs', "${projectDir}/jars/derbytools-10.15.2.0.jar",
+                '--addlibs', "${projectDir}/jars/derby-10.15.2.0.jar",
+                '--addlibs', "${projectDir}/jars/derbyshared-10.15.2.0.jar")
     }
 }
