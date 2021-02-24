@@ -6,6 +6,7 @@ plugins {
 targetCompatibility = JavaVersion.VERSION_14
 sourceCompatibility = JavaVersion.VERSION_14
 
+
 group 'dev.pinter.webapp-skel'
 version '0.2'
 
@@ -45,6 +46,7 @@ task runMicro(type: Exec, dependsOn: war) {
         def payaraLibs = configurations.providedRuntime.findAll().join(File.pathSeparator)
         commandLine(
                 System.getProperty('java.home') + '/bin/java',
+                "-Dderby.system.home=${projectDir}/DERBYTUTOR",
                 "-Djavax.net.ssl.keyStore=${projectDir}/dist/localhost.jks",
                 '-Djavax.net.ssl.keyStorePassword=changeit',
                 '--add-modules', 'java.se',

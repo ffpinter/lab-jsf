@@ -10,7 +10,7 @@ public class DAO {
     private final Jdbi jdbi = Jdbi.create("jdbc:derby:firstdb");
 
     public DAO() {
-        System.setProperty("derby.system.home", "E:/Users/flavio/Documents/DERBYTUTOR/");
+        //System.setProperty("derby.system.home", "E:/Users/flavio/Documents/DERBYTUTOR/");
     }
 
     public int insertGame(int id, String jogo) throws DataAccessException {
