@@ -39,7 +39,9 @@
         <p:inputNumber id="tableid" value="#{dbAccess.newId}" label="Id"/>
         <p:outputLabel for="tablejogo">jogo</p:outputLabel>
         <p:inputText id="tablejogo" value="#{dbAccess.newJogo}" label="Jogo"/>
-        <p:commandButton value="Inserir" actionListener="#{dbAccess.insertGamesList}" update="dtgames tableid tablejogo"/>
+        <p:commandButton value="Inserir" actionListener="#{dbAccess.insertGamesList}"
+                         update="dtgames tableid tablejogo"/>
+        <p:commandButton value="Infos page" action="info" />
     </h:form>
 </h:body>
 </html>

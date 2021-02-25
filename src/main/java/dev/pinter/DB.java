@@ -11,14 +11,13 @@ import java.util.List;
 @Named("dbAccess")
 @ViewScoped
 public class DB implements Serializable {
-    DAO dao = new DAO();
+    Service service = new Service();
     private List<Game> gamesList;
 
     private int newId;
     private String newJogo;
 
     public int getNewId() {
-
         return newId;
     }
 
@@ -35,10 +34,10 @@ public class DB implements Serializable {
     }
 
     public DB() {
-        gamesList = dao.selectTable("GAME");
+        gamesList = service.getList("GAME");
         int max = 0;
-        for (Game g: gamesList) {
-            if(g.getId() > max){
+        for (Game g : gamesList) {
+            if (g.getId() > max) {
                 max = g.getId();
                 newId = max + 1;
             }
@@ -51,8 +50,8 @@ public class DB implements Serializable {
 
     public void insertGamesList(ActionEvent event) {
         try {
-            dao.insertGame(newId, newJogo);
-            gamesList = dao.selectTable("GAME");
+            service.setList(newId, newJogo);
+            gamesList = service.getList("GAME");
             newId = 0;
             newJogo = "";
         } catch (DataAccessException e) {

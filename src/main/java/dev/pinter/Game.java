@@ -9,34 +9,43 @@ public class Game {
     @ColumnName("JOGO")
     private String jogo;
 
-    public Game(){}
-
-    public Game(int id, String jogo){
-        this.id = id;
-        this.jogo = jogo;
-    }
-
-    public int getId(){
-        return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
-    }
-
-    public String getJogo(){
-        return jogo;
-    }
-
-    public void setJogo(String jogo){
-        this.jogo = jogo;
-    }
+    @ColumnName("DESCRICAO")
+    private String desc;
 
     @Override
     public String toString() {
         return "Game{" +
                 "id=" + id +
                 ", jogo='" + jogo + '\'' +
+                ", desc='" + desc + '\'' +
                 '}';
     }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public Game() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getJogo() {
+        return jogo;
+    }
+
+    public void setJogo(String jogo) {
+        this.jogo = jogo;
+    }
+
 }
