@@ -1,11 +1,17 @@
 package dev.pinter;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URLConnection;
 import java.util.List;
 
 @Named("dbAccess")
@@ -34,7 +40,7 @@ public class DB implements Serializable {
     }
 
     public DB() {
-        gamesList = service.getList("GAME");
+        gamesList = service.getGameList();
         int max = 0;
         for (Game g : gamesList) {
             if (g.getId() > max) {
@@ -50,8 +56,8 @@ public class DB implements Serializable {
 
     public void insertGamesList(ActionEvent event) {
         try {
-            service.setList(newId, newJogo);
-            gamesList = service.getList("GAME");
+            service.createGame(newId, newJogo);
+            gamesList = service.getGameList();
             newId = 0;
             newJogo = "";
         } catch (DataAccessException e) {
@@ -59,5 +65,22 @@ public class DB implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao inserir", null));
             e.printStackTrace();
         }
+    }
+
+    public StreamedContent getImageStream(int id) {
+        Game game = gamesList.stream().filter(f -> f.getId() == id).findFirst().orElse(null);
+        if (game == null || game.getImg() == null) {
+            return null;
+        }
+        try {
+            String mimeType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(game.getImg()));
+            return DefaultStreamedContent.builder()
+                    .contentType(mimeType).stream(() -> new ByteArrayInputStream(game.getImg())).
+                            build();
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+        return null;
     }
 }

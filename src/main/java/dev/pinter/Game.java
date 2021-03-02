@@ -1,6 +1,9 @@
 package dev.pinter;
 
+import org.apache.derby.iapi.util.ByteArray;
 import org.jdbi.v3.core.mapper.reflect.ColumnName;
+
+import java.awt.*;
 
 public class Game {
     @ColumnName("ID")
@@ -11,6 +14,9 @@ public class Game {
 
     @ColumnName("DESCRICAO")
     private String desc;
+
+
+    private byte[] img;
 
     @Override
     public String toString() {
@@ -48,4 +54,11 @@ public class Game {
         this.jogo = jogo;
     }
 
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
+    }
 }

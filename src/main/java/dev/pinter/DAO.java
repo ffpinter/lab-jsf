@@ -24,10 +24,10 @@ public class DAO {
         }
     }
 
-    public List<Game> selectTable(String tablename) {
+    public List<Game> selectGame() {
         return jdbi.withHandle(handle -> {
             handle.registerRowMapper(FieldMapper.factory(Game.class));
-            return handle.createQuery("SELECT * FROM " + tablename)
+            return handle.createQuery("SELECT * FROM GAME")
                     .mapTo(Game.class)
                     .list();
         });

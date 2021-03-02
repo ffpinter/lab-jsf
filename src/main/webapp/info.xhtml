@@ -18,6 +18,9 @@
                 <p>
                     #{g.desc}
                 </p>
+                <p>
+                    <p:graphicImage value="#{dbAccess.getImageStream(g.id)}" stream="false"/>
+                </p>
             </p:tab>
         </p:accordionPanel>
     </h:form>
