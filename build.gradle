@@ -7,7 +7,7 @@ targetCompatibility = JavaVersion.VERSION_14
 sourceCompatibility = JavaVersion.VERSION_14
 
 
-group 'dev.pinter.webapp-skel'
+group 'dev.pinter.lab-jsf'
 version '0.2'
 
 ext['payaraMicroVersion'] = '5.201'
