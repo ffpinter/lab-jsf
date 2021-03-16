@@ -21,7 +21,7 @@ public class Service {
     public List<Game> getGameList() {
         List<Game> games = dao.selectGame();
         for( Game g : games) {
-            File file = new File("C:/Users/flavi/Documents/JsfGamesImages/" + g.getId() + ".png");
+            File file = new File(System.getProperty("user.dir") + "/JsfGamesImages/" + g.getId() + ".png");
             if(file.isFile()){
                 try {
                     InputStream is = Files.newInputStream(file.toPath(), StandardOpenOption.READ);
