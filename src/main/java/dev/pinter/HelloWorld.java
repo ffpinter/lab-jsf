@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2021 - Flavio Freitas Pinter
+ */
+
 package dev.pinter;
 
 import javax.annotation.PostConstruct;
