@@ -20,12 +20,12 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SpotAPI {
+public class SpotifyAPI {
 
-    public AccessTokenResponse getAccessToken(String authToken) {
+    public AccessTokenResponse getAccessToken(String encodedAuth) {
         return request(AccessTokenResponse.class,
                 "https://accounts.spotify.com/api/token",
-                authToken,
+                encodedAuth,
                 true,
                 null);
     }
