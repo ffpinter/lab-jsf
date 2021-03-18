@@ -87,4 +87,10 @@ public class DB implements Serializable {
         }
         return null;
     }
+//
+//    public Album requestAlbum(String id){
+//        AccessTokenResponse accessToken = service.getAccesssToken();
+//        return service.getAlbum(accessToken.getAccessToken(), id);
+//    }
+//
 }

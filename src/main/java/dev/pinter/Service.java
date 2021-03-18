@@ -12,8 +12,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class Service {
-    DAO dao = new DAO();
-    SpotifyAPI spotifyAPI = new SpotifyAPI();
+    private final DAO dao = new DAO();
 
     public Service() {
     }
@@ -36,18 +35,5 @@ public class Service {
 
     public void createGame(int id, String jogo) throws DataAccessException {
         dao.insertGame(id, jogo);
-    }
-    
-    public AccessTokenResponse getAccesssToken() {
-        String encodedAuth = spotifyAPI.getEncodedIds();
-        return spotifyAPI.getAccessToken(encodedAuth);
-    }
-
-    public Album getAlbum(String authToken, String id) {
-        return spotifyAPI.getAlbum(authToken, id);
-    }
-
-    public Artist getArtist(String authToken, String id){
-        return spotifyAPI.getArtist(authToken, id);
     }
 }
