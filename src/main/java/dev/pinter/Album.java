@@ -26,13 +26,14 @@ public class Album {
     private String id;
 
     @JsonProperty("available_markets")
-    private List<String> available_markets;
+    private List<String> availableMarkets;
 
     @JsonProperty("artists")
     private List<Artist> artists;
 
     @JsonProperty("name")
     private String name;
+
     @JsonProperty("release_date")
     private Date releaseDate;
 
@@ -103,12 +104,12 @@ public class Album {
         this.id = id;
     }
 
-    public List<String> getAvailable_markets() {
-        return available_markets;
+    public List<String> getAvailableMarkets() {
+        return availableMarkets;
     }
 
-    public void setAvailable_markets(List<String> available_markets) {
-        this.available_markets = available_markets;
+    public void setAvailableMarkets(List<String> availableMarkets) {
+        this.availableMarkets = availableMarkets;
     }
 
     @Override
@@ -118,7 +119,7 @@ public class Album {
                 ", genres=" + genres +
                 ", href='" + href + "\n" +
                 ", id='" + id + "\n" +
-                ", available_markets=" + available_markets + "\n" +
+                ", available_markets=" + availableMarkets + "\n" +
                 ", artists=" + artists + "\n" +
                 ", name='" + name + "\n" +
                 ", releaseDate=" + releaseDate + "\n" +

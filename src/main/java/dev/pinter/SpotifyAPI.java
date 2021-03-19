@@ -74,9 +74,4 @@ public class SpotifyAPI {
                     .get(type);
         }
     }
-
-    public String getEncodedIds() {
-        return Base64.getEncoder()
-                .encodeToString("4c13d223b3fd459d8cd39564e9309589:18eef649a5f04e2b948b3981f7eb5349".getBytes());
-    }
 }

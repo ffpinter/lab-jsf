@@ -22,9 +22,9 @@
 <h:body>
     <h:form id="form">
         <!--            <h:outputText value="#{msg['helloWorld.message']}"/>-->
-            <p:growl id="growl">
-                <p:autoUpdate/>
-            </p:growl>
+        <p:growl id="growl">
+            <p:autoUpdate/>
+        </p:growl>
 
         <p:dataTable id="dtgames" value="#{dbAccess.gamesList}" var="g" reflow="true"
                      rowStyleClass="cheap" styleClass="tabela">
@@ -38,14 +38,15 @@
                 #{g.jogo}
             </p:column>
         </p:dataTable>
-<!-- ajax status -->
+        <!-- ajax status -->
         <p:outputLabel for="tableid">id</p:outputLabel>
         <p:inputNumber id="tableid" value="#{dbAccess.newId}" label="Id"/>
         <p:outputLabel for="tablejogo">jogo</p:outputLabel>
         <p:inputText id="tablejogo" value="#{dbAccess.newJogo}" label="Jogo"/>
         <p:commandButton value="Inserir" actionListener="#{dbAccess.insertGamesList}"
                          update="dtgames tableid tablejogo"/>
-        <p:commandButton value="Infos page" action="info" />
+        <p:commandButton value="Infos page" action="info"/>
+        <p:commandButton value="Spotify page" action="spotify"/>
     </h:form>
 </h:body>
 </html>
