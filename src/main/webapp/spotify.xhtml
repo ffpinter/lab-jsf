@@ -17,26 +17,30 @@
 </h:head>
 <h:body>
     <h:form id="form">
-        <p:inputText value="#{spotifyBean.albumId}" id="albumid"/>
-        <p:commandButton type="button" value="Update" update="form" actionListener="#{spotifyBean.toggleRendered()}"/>
-        <p:dataTable value="#{spotifyBean.requestAlbum()}" var="album" id="spotdt" rendered="#{spotifyBean.rendered}">
-            <p:column>
-                <f:facet name="header">Name</f:facet>
-                #{album.name}
-            </p:column>
-            <p:column>
-                <f:facet name="header">Name</f:facet>
-                #{album.type}
-            </p:column>
-            <p:column>
-                <f:facet name="header">Name</f:facet>
-                #{album.releaseDate}
-            </p:column>
-            <p:column>
-                <f:facet name="header">Name</f:facet>
-                #{album.popularity}
-            </p:column>
-        </p:dataTable>
+        <h:panelGroup id="padding" layout="block">
+            <p:inputText value="#{spotifyBean.albumId}" id="albumid"/>
+            <p:commandButton type="button" value="Update" update="padding"
+                             actionListener="#{spotifyBean.toggleRendered()}"/>
+            <p:dataTable value="#{spotifyBean.requestAlbum()}" var="album" id="spotdt"
+                         rendered="#{spotifyBean.rendered}">
+                <p:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{album.name}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{album.type}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{album.releaseDate}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{album.popularity}
+                </p:column>
+            </p:dataTable>
+        </h:panelGroup>
     </h:form>
 </h:body>
 </html>
