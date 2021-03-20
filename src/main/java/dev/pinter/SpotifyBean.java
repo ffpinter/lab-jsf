@@ -47,12 +47,11 @@ public class SpotifyBean implements Serializable {
     public void requestAlbum(ActionEvent event) {
 //        5PORx6PL7CdOywSJuGVrnc
         setRendered(true);
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         AccessTokenResponse accessToken = utils.getAccesssToken();
         if(accessToken == null){
             throw new NotAuthorizedException("Error: invalid token");
         }
-        System.out.println(accessToken.getAccessToken());
+        System.out.println(accessToken);
         System.out.println(albumId);
         albums.add(utils.getAlbum(accessToken.getAccessToken(), albumId));
     }

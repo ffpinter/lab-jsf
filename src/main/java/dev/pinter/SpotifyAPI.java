@@ -4,7 +4,6 @@
 
 package dev.pinter;
 
-import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.glassfish.jersey.logging.LoggingFeature;
 
@@ -49,10 +48,7 @@ public class SpotifyAPI {
         Logger logger = Logger.getLogger(getClass().getName());
         Feature feature = new LoggingFeature(logger, Level.INFO, null, null);
 
-//        ClientConfig cc = new ClientConfig();
-//        cc.getClasses().add(JacksonJsonProvider.class);
-
-        WebTarget target = ClientBuilder.newClient().register(feature)
+        WebTarget target = ClientBuilder.newClient().register(JacksonJsonProvider.class).register(feature)
                 .target(url);
 
         if (queryParams != null) {

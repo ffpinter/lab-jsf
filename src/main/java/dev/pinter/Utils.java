@@ -6,9 +6,10 @@ public class Utils {
     private final SpotifyAPI spotifyAPI = new SpotifyAPI();
 
     public AccessTokenResponse getAccesssToken() {
-        String encodedAuth = Base64.getEncoder()
+        String d = Base64.getEncoder()
                 .encodeToString("4c13d223b3fd459d8cd39564e9309589:18eef649a5f04e2b948b3981f7eb5349".getBytes());
-        return spotifyAPI.getAccessToken(encodedAuth);
+
+        return spotifyAPI.getAccessToken(d);
     }
 
     public Album getAlbum(String authToken, String id) {
