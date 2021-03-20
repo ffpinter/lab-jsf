@@ -4,16 +4,14 @@
 
 package dev.pinter;
 
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.glassfish.jersey.logging.LoggingFeature;
 
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.client.*;
 import javax.ws.rs.core.Feature;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,8 +47,10 @@ public class SpotifyAPI {
     public <T> T request(Class<T> type, String url, String authToken, boolean accessToken, HashMap<String,
             List<String>> queryParams) {
         Logger logger = Logger.getLogger(getClass().getName());
-
         Feature feature = new LoggingFeature(logger, Level.INFO, null, null);
+
+//        ClientConfig cc = new ClientConfig();
+//        cc.getClasses().add(JacksonJsonProvider.class);
 
         WebTarget target = ClientBuilder.newClient().register(feature)
                 .target(url);

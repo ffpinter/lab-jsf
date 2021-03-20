@@ -17,27 +17,26 @@
 </h:head>
 <h:body>
     <h:form id="form">
-        <h:panelGroup id="padding" layout="block">
+        <h:panelGroup>
             <p:inputText value="#{spotifyBean.albumId}" id="albumid"/>
-            <p:commandButton type="button" value="Update" update="padding"
-                             actionListener="#{spotifyBean.toggleRendered()}"/>
-            <p:dataTable value="#{spotifyBean.requestAlbum()}" var="album" id="spotdt"
-                         rendered="#{spotifyBean.rendered}">
+            <p:commandButton value="Update" update="form"
+                             actionListener="#{spotifyBean.requestAlbum}"/>
+            <p:dataTable value="#{spotifyBean.albums}" var="a" id="spotdt">
                 <p:column>
                     <f:facet name="header">Name</f:facet>
-                    #{album.name}
+                    #{a.name}
                 </p:column>
                 <p:column>
-                    <f:facet name="header">Name</f:facet>
-                    #{album.type}
+                    <f:facet name="header">Type</f:facet>
+                    #{a.type}
                 </p:column>
                 <p:column>
-                    <f:facet name="header">Name</f:facet>
-                    #{album.releaseDate}
+                    <f:facet name="header">ReleaseDate</f:facet>
+                    #{a.releaseDate}
                 </p:column>
                 <p:column>
-                    <f:facet name="header">Name</f:facet>
-                    #{album.popularity}
+                    <f:facet name="header">Popularity</f:facet>
+                    #{a.popularity}
                 </p:column>
             </p:dataTable>
         </h:panelGroup>
