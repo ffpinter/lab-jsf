@@ -1,0 +1,10 @@
+.tabela{
+        width: 50% !important;
+}
+
+.coluna{
+        background-color: #0948e8 !important;
+        background-image: none !important;
+        color: #ffffff !important;
+        text-align:center;
+}

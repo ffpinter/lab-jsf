@@ -11,6 +11,7 @@
       xmlns="http://www.w3.org/1999/xhtml">
 <f:view locale="#{language.current}"/>
 <h:head>
+    <h:outputStylesheet library="default" name="css/spotify.css"/>
     <!--    <ui:insert name="htmlhead">-->
     <!--        <ui:include src="/WEB-INF/templates/htmlhead.xhtml"/>-->
     <!--    </ui:insert>-->
@@ -18,10 +19,11 @@
 <h:body>
     <h:form id="form">
         <h:panelGroup>
+            <p:outputLabel value="Enter the Album ID: " />
             <p:inputText value="#{spotifyBean.albumId}" id="albumid"/>
-            <p:commandButton value="Update" update="form"
+            <p:commandButton value="Get album" update="form"
                              actionListener="#{spotifyBean.requestAlbum}"/>
-            <p:dataTable value="#{spotifyBean.albums}" var="a" id="spotdt">
+            <p:dataTable value="#{spotifyBean.albums}" var="a" id="spotdt" rowStyleClass="coluna" styleClass="tabela">
                 <p:column>
                     <f:facet name="header">Name</f:facet>
                     #{a.name}
