@@ -41,7 +41,7 @@ public class SpotifyBean implements Serializable {
         this.albumId = albumId;
     }
 
-    public void toggleRendered(){
+    public void toggleRendered() {
         this.rendered = !rendered;
     }
 
@@ -49,11 +49,14 @@ public class SpotifyBean implements Serializable {
 //        5PORx6PL7CdOywSJuGVrnc
         setRendered(true);
         AccessTokenResponse accessToken = utils.getAccesssToken();
-        if(accessToken == null){
+        if (accessToken == null) {
             throw new NotAuthorizedException("Error: invalid token");
         }
         System.out.println(accessToken);
         System.out.println(albumId);
+        if (albumId.length() == 0) {
+            throw new RuntimeException("Invalid id");
+        }
         albums.add(utils.getAlbum(accessToken.getAccessToken(), albumId));
     }
 }
