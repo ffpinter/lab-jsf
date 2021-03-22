@@ -6,6 +6,7 @@ import javax.inject.Named;
 import javax.ws.rs.NotAuthorizedException;
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Named("spotifyBean")
@@ -14,7 +15,7 @@ public class SpotifyBean implements Serializable {
     private final Utils utils = new Utils();
     private String albumId;
     private boolean rendered = false;
-    private List<Album> albums;
+    private List<Album> albums = new ArrayList<>(10);
 
     public List<Album> getAlbums() {
         return albums;
