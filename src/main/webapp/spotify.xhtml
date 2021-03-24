@@ -30,7 +30,7 @@
                 </p:column>
                 <p:column>
                     <f:facet name="header">Artist</f:facet>
-                    #{a.artists[0]}
+                    #{a.artists[0]}}
                 </p:column>
                 <p:column>
                     <f:facet name="header">Type</f:facet>
@@ -46,6 +46,11 @@
                 </p:column>
             </p:dataTable>
         </h:panelGroup>
+    </h:form>
+    <h:form>
+        <p:inputText value="#{spotifyBean.searchArtist}" id="albumid"/>
+        <p:commandButton value="Get album" update="form"
+                         actionListener="#{spotifyBean.searchArtist}"/>
     </h:form>
 </h:body>
 </html>

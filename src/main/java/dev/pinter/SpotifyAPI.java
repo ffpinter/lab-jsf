@@ -44,8 +44,8 @@ public class SpotifyAPI {
                 null);
     }
 
-    public <T> T request(Class<T> type, String url, String authToken, boolean accessToken, HashMap<String,
-            List<String>> queryParams) {
+    public <T> T request(Class<T> type, String url, String authToken, boolean accessToken,
+                         HashMap<String, List<String>> queryParams) {
         Logger logger = Logger.getLogger(getClass().getName());
         Feature feature = new LoggingFeature(logger, Level.INFO, null, null);
 
