@@ -3,7 +3,7 @@ package dev.pinter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SearchRoot {
-    @JsonProperty("artist")
+    @JsonProperty("artists")
     private SearchArtist searchArtist;
 
     public SearchArtist getSearchArtist() {
@@ -16,8 +16,8 @@ public class SearchRoot {
 
     @Override
     public String toString() {
-        return "SearchRoot{" +
+        return "SearchRoot{" + "\n" +
                 "searchArtist=" + searchArtist +
-                '}';
+                "}\n\n\n";
     }
 }

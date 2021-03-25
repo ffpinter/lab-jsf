@@ -85,14 +85,14 @@ public class SearchArtist {
 
     @Override
     public String toString() {
-        return "SearchArtist{" +
+        return "SearchArtist{" + "\n" +
                 "href='" + href + "\n" +
-                ", limit=" + limit +
-                ", items=" + items +
+                ", limit=" + limit + "\n" +
+                ", items=" + items + "\n" +
                 ", next='" + next + "\n" +
-                ", offset=" + offset +
+                ", offset=" + offset + "\n" +
                 ", previous='" + previous + "\n" +
-                ", total=" + total +
-                '}';
+                ", total=" + total + "\n" +
+                "}\n\n\n\n";
     }
 }

@@ -8,6 +8,9 @@ public class SearchItem {
     @JsonProperty("external_urls")
     private SearchExternalUrl externalUrl;
 
+    @JsonProperty("followers")
+    private SearchFollowers followers;
+
     @JsonProperty("genres")
     private List<String> genres;
 
@@ -22,6 +25,9 @@ public class SearchItem {
 
     @JsonProperty("name")
     private String name;
+
+    @JsonProperty("type")
+    private String type;
 
     @JsonProperty("popularity")
     private int popularity;
@@ -40,6 +46,22 @@ public class SearchItem {
 
     public List<String> getGenres() {
         return genres;
+    }
+
+    public SearchFollowers getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(SearchFollowers followers) {
+        this.followers = followers;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setGenres(List<String> genres) {
@@ -97,14 +119,16 @@ public class SearchItem {
     @Override
     public String toString() {
         return "SearchItem{" +
-                "spotify=" + externalUrl +
-                ", genres=" + genres +
-                ", href='" + href + "\n" +
-                ", id='" + id + "\n" +
-                ", images=" + images +
-                ", name='" + name + "\n" +
-                ", popularity=" + popularity +
-                ", uri='" + uri + "\n" +
-                '}';
+                "externalUrl=" + externalUrl + "\n" +
+                " followers=" + followers + "\n" +
+                " genres=" + genres + "\n" +
+                " href='" + href + "\n" +
+                " id='" + id + "\n" +
+                " images=" + images + "\n" +
+                " name='" + name + "\n" +
+                " type='" + type + "\n" +
+                " popularity=" + popularity + "\n" +
+                " uri='" + uri + "\n" +
+                "}\n\n\n\n";
     }
 }
