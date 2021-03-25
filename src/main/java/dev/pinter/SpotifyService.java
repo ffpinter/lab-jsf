@@ -23,11 +23,11 @@ public class SpotifyService {
         return spotifyAPI.getArtist(authToken, id);
     }
 
-    public SearchResponse searchArtist(String query, String authtoken) {
+    public SearchRoot searchArtist(String query, String authtoken) {
         HashMap<String, List<String>> hash = new HashMap<>();
         hash.put("q", Collections.singletonList(query));
         hash.put("type", Collections.singletonList("artist"));
-        return spotifyAPI.request(SearchResponse.class,
+        return spotifyAPI.request(SearchRoot.class,
                 "https://api.spotify.com/v1/search",
                 authtoken,
                 false,

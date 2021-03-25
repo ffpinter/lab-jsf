@@ -48,8 +48,8 @@
         </h:panelGroup>
     </h:form>
     <h:form>
-        <p:inputText value="#{spotifyBean.searchArtist}" id="albumid"/>
-        <p:commandButton value="Get album" update="form"
+        <p:inputText value="#{spotifyBean.searchArtistName}" id="albumid"/>
+        <p:commandButton value="Search" update="form"
                          actionListener="#{spotifyBean.searchArtist}"/>
     </h:form>
 </h:body>
