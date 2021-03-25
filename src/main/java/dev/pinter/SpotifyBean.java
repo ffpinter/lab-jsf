@@ -78,8 +78,9 @@ public class SpotifyBean implements Serializable {
     }
 
     public void searchArtist(ActionEvent event) {
-        response = spotifyService.searchArtist(searchArtistName, spotifyService.getAccesssToken().getAccessToken());
-        System.out.println(response);
+        String at = spotifyService.getAccesssToken().getAccessToken();
+        response = spotifyService.searchArtist(searchArtistName, at);
         String artistId = response.getSearchArtist().getItems().get(0).getId();
+
     }
 }
