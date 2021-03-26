@@ -19,18 +19,19 @@
 <h:body>
     <h:form id="form">
         <h:panelGroup>
-            <p:outputLabel value="Enter the Album ID: " />
+            <p:outputLabel value="Enter the Album ID: "/>
             <p:inputText value="#{spotifyBean.albumId}" id="albumid"/>
             <p:commandButton value="Get album" update="form"
                              actionListener="#{spotifyBean.requestAlbum}"/>
-            <p:dataTable value="#{spotifyBean.albums}" var="a" id="spotdt" rowStyleClass="coluna" styleClass="tabela">
+            <p:dataTable value="#{spotifyBean.albums}" var="a" id="spotifyalbum" rowStyleClass="coluna"
+                         styleClass="tabela">
                 <p:column>
                     <f:facet name="header">Name</f:facet>
                     #{a.name}
                 </p:column>
                 <p:column>
                     <f:facet name="header">Artist</f:facet>
-                    #{a.artists[0]}}
+                    #{a.artists[0]}
                 </p:column>
                 <p:column>
                     <f:facet name="header">Type</f:facet>
@@ -47,10 +48,31 @@
             </p:dataTable>
         </h:panelGroup>
     </h:form>
-    <h:form>
+
+    <h:form id="formartist">
+        <p:outputLabel value="Enter the artist name: "/>
         <p:inputText value="#{spotifyBean.searchArtistName}" id="albumid"/>
-        <p:commandButton value="Search" update="form"
+        <p:commandButton value="Search" update="formartist"
                          actionListener="#{spotifyBean.searchArtist}"/>
+        <p:dataTable value="#{spotifyBean.artists}" var="ar" id="spotifyartist"
+                     rowStyleClass="coluna" styleClass="tabela">
+            <p:column>
+                <f:facet name="header">Name</f:facet>
+                #{ar.name}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Popularity</f:facet>
+                #{ar.popularity}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Followers</f:facet>
+                #{ar.followers.total}
+            </p:column>
+            <p:column>
+                <f:facet name="header">Genres</f:facet>
+                #{ar.genres}
+            </p:column>
+        </p:dataTable>
     </h:form>
 </h:body>
 </html>

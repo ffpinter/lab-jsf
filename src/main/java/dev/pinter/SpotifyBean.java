@@ -17,6 +17,7 @@ public class SpotifyBean implements Serializable {
     private List<Album> albums = new ArrayList<>(10);
     private String searchArtistName;
     private SearchRoot response;
+    private List<SearchItem> artists = new ArrayList<>(10);
 
     public String getSearchArtistName() {
         return searchArtistName;
@@ -62,6 +63,14 @@ public class SpotifyBean implements Serializable {
         this.response = response;
     }
 
+    public List<SearchItem> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<SearchItem> artists) {
+        this.artists = artists;
+    }
+
     public void requestAlbum(ActionEvent event) {
 //        5PORx6PL7CdOywSJuGVrnc
         setRendered(true);
@@ -80,7 +89,6 @@ public class SpotifyBean implements Serializable {
     public void searchArtist(ActionEvent event) {
         String at = spotifyService.getAccesssToken().getAccessToken();
         response = spotifyService.searchArtist(searchArtistName, at);
-        String artistId = response.getSearchArtist().getItems().get(0).getId();
-
+        artists.add(response.getSearchArtist().getItems().get(0));
     }
 }
