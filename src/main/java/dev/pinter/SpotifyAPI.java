@@ -5,7 +5,6 @@
 package dev.pinter;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.glassfish.jersey.logging.LoggingFeature;
 
 import javax.ws.rs.client.*;
@@ -42,6 +41,14 @@ public class SpotifyAPI {
                 authToken,
                 false,
                 null);
+    }
+
+    public ArtistAlbumsRoot getArtistAlbums(String authToken, String id, HashMap<String, List<String>> hash) {
+        return request(ArtistAlbumsRoot.class,
+                "https://api.spotify.com/v1/artists/" + id + "/albums",
+                authToken,
+                false,
+                hash);
     }
 
     public <T> T request(Class<T> type, String url, String authToken, boolean accessToken,

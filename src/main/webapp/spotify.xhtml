@@ -54,23 +54,23 @@
         <p:inputText value="#{spotifyBean.searchArtistName}" id="albumid"/>
         <p:commandButton value="Search" update="formartist"
                          actionListener="#{spotifyBean.searchArtist}"/>
-        <p:dataTable value="#{spotifyBean.artists}" var="ar" id="spotifyartist"
+        <p:dataTable value="#{spotifyBean.artistAlbumsList}" var="aal" id="spotifyartist"
                      rowStyleClass="coluna" styleClass="tabela">
             <p:column>
                 <f:facet name="header">Name</f:facet>
-                #{ar.name}
+                #{aal.name}
             </p:column>
             <p:column>
-                <f:facet name="header">Popularity</f:facet>
-                #{ar.popularity}
+                <f:facet name="header">Release Date</f:facet>
+                #{aal.releaseDate}
             </p:column>
             <p:column>
-                <f:facet name="header">Followers</f:facet>
-                #{ar.followers.total}
+                <f:facet name="header">Album Group</f:facet>
+                #{aal.albumGroup}
             </p:column>
             <p:column>
-                <f:facet name="header">Genres</f:facet>
-                #{ar.genres}
+                <f:facet name="header">Total Tracks</f:facet>
+                #{aal.totalTracks}
             </p:column>
         </p:dataTable>
     </h:form>

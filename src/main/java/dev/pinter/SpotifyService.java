@@ -23,6 +23,13 @@ public class SpotifyService {
         return spotifyAPI.getArtist(authToken, id);
     }
 
+    public ArtistAlbumsRoot getArtistAlbums(String authToken, String id) {
+        HashMap<String, List<String>> hash = new HashMap<>(1000);
+        hash.put("limit", Collections.singletonList("50"));
+
+        return spotifyAPI.getArtistAlbums(authToken, id, hash);
+    }
+
     public SearchRoot searchArtist(String query, String authtoken) {
         HashMap<String, List<String>> hash = new HashMap<>();
         hash.put("q", Collections.singletonList(query));

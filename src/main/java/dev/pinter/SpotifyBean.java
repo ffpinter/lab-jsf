@@ -14,10 +14,11 @@ public class SpotifyBean implements Serializable {
     private final SpotifyService spotifyService = new SpotifyService();
     private String albumId;
     private boolean rendered = false;
-    private List<Album> albums = new ArrayList<>(10);
+    private List<Album> albums = new ArrayList<>(100000);
     private String searchArtistName;
     private SearchRoot response;
-    private List<SearchItem> artists = new ArrayList<>(10);
+    private List<SearchItem> artists = new ArrayList<>(100000);
+    private List<ArtistAlbumsItem> artistAlbumsList = new ArrayList<>(100000);
 
     public String getSearchArtistName() {
         return searchArtistName;
@@ -71,6 +72,14 @@ public class SpotifyBean implements Serializable {
         this.artists = artists;
     }
 
+    public List<ArtistAlbumsItem> getArtistAlbumsList() {
+        return artistAlbumsList;
+    }
+
+    public void setArtistAlbumsList(List<ArtistAlbumsItem> artistAlbumsList) {
+        this.artistAlbumsList = artistAlbumsList;
+    }
+
     public void requestAlbum(ActionEvent event) {
 //        5PORx6PL7CdOywSJuGVrnc
         setRendered(true);
@@ -86,9 +95,29 @@ public class SpotifyBean implements Serializable {
         albums.add(spotifyService.getAlbum(accessToken.getAccessToken(), albumId));
     }
 
+    public void requestArtistAlbums(String at, String id) {
+        ArtistAlbumsRoot aar = spotifyService.getArtistAlbums(at, id);
+        artistAlbumsList = aar.getItemsList();
+        System.out.println(aar);
+    }
+
     public void searchArtist(ActionEvent event) {
         String at = spotifyService.getAccesssToken().getAccessToken();
         response = spotifyService.searchArtist(searchArtistName, at);
-        artists.add(response.getSearchArtist().getItems().get(0));
+        SearchItem si = response.getSearchArtist().getItems().get(0);
+        String id = si.getId();
+        requestArtistAlbums(at, id);
+        for (int i = 0; i <= artistAlbumsList.size() - 1; i++) {
+            if (artistAlbumsList.get(i).getName().equals(artistAlbumsList.get(i + 1).getName()) ||
+                    artistAlbumsList.get(i).getId().equals(artistAlbumsList.get(i + 1).getId()) ||
+                    artistAlbumsList.get(i).getReleaseDate().equals(artistAlbumsList.get(i + 1).getReleaseDate()) ||
+                    artistAlbumsList.get(i).getTotalTracks() == artistAlbumsList.get(i + 1).getTotalTracks()) {
+                artistAlbumsList.remove(i + 1);
+            }
+        }
+    }
+
+    public String strList(List<String> genres) {
+        return genres.toString().replace("[", "").replace("]", "");
     }
 }

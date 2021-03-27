@@ -14,6 +14,8 @@ public class SearchItem {
     @JsonProperty("genres")
     private List<String> genres;
 
+    private String strGenres;
+
     @JsonProperty("href")
     private String href;
 
@@ -106,6 +108,14 @@ public class SearchItem {
 
     public void setPopularity(int popularity) {
         this.popularity = popularity;
+    }
+
+    public String getStrGenres() {
+        return strGenres;
+    }
+
+    public void setStrGenres(String strGenres) {
+        this.strGenres = strGenres;
     }
 
     public String getUri() {
