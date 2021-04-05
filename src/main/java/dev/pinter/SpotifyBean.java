@@ -8,10 +8,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Bean do spotify
+ */
 @Named("spotifyBean")
 @ViewScoped
 public class SpotifyBean implements Serializable {
     private final SpotifyService spotifyService = new SpotifyService();
+    /**
+     * ID de um album
+     */
     private String albumId;
     private boolean rendered = false;
     private List<Album> albums = new ArrayList<>(100000);
@@ -24,6 +30,11 @@ public class SpotifyBean implements Serializable {
         return searchArtistName;
     }
 
+    /**
+     * Setter @see searchArtistName
+     *
+     * @param searchArtistName nome do artista
+     */
     public void setSearchArtistName(String searchArtistName) {
         this.searchArtistName = searchArtistName;
     }
@@ -101,6 +112,11 @@ public class SpotifyBean implements Serializable {
         System.out.println(aar);
     }
 
+    /**
+     * Método que busca os albums de um artista pelo seu nome @see SpotifyBean#requestArtisAlbums
+     *
+     * @param event blablablabla
+     */
     public void searchArtist(ActionEvent event) {
         String at = spotifyService.getAccesssToken().getAccessToken();
         response = spotifyService.searchArtist(searchArtistName, at);
