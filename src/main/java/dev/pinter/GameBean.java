@@ -20,8 +20,8 @@ import java.util.List;
 
 @Named("dbAccess")
 @ViewScoped
-public class DB implements Serializable {
-    Service service = new Service();
+public class GameBean implements Serializable {
+    GameService gameService = new GameService();
     private List<Game> gamesList;
 
     private int newId;
@@ -43,8 +43,8 @@ public class DB implements Serializable {
         this.newJogo = newJogo;
     }
 
-    public DB() {
-        gamesList = service.getGameList();
+    public GameBean() {
+        gamesList = gameService.getGameList();
         int max = 0;
         for (Game g : gamesList) {
             if (g.getId() > max) {
@@ -60,8 +60,8 @@ public class DB implements Serializable {
 
     public void insertGamesList(ActionEvent event) {
         try {
-            service.createGame(newId, newJogo);
-            gamesList = service.getGameList();
+            gameService.createGame(newId, newJogo);
+            gamesList = gameService.getGameList();
             newId = 0;
             newJogo = "";
         } catch (DataAccessException e) {
@@ -89,8 +89,8 @@ public class DB implements Serializable {
     }
 //
 //    public Album requestAlbum(String id){
-//        AccessTokenResponse accessToken = service.getAccesssToken();
-//        return service.getAlbum(accessToken.getAccessToken(), id);
+//        AccessTokenResponse accessToken = gameService.getAccesssToken();
+//        return gameService.getAlbum(accessToken.getAccessToken(), id);
 //    }
 //
 }

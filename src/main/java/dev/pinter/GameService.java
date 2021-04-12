@@ -11,10 +11,10 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
-public class Service {
+public class GameService {
     private final DAO dao = new DAO();
 
-    public Service() {
+    public GameService() {
     }
 
     public List<Game> getGameList() {

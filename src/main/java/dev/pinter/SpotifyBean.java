@@ -1,10 +1,18 @@
 package dev.pinter;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.ws.rs.NotAuthorizedException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +33,18 @@ public class SpotifyBean implements Serializable {
     private SearchRoot response;
     private List<SearchItem> artists = new ArrayList<>(100000);
     private List<ArtistAlbumsItem> artistAlbumsList = new ArrayList<>(100000);
+    private StreamedContent albumImage;
 
     public String getSearchArtistName() {
         return searchArtistName;
+    }
+
+    public StreamedContent getAlbumImage() {
+        return albumImage;
+    }
+
+    public void setAlbumImage(StreamedContent albumImage) {
+        this.albumImage = albumImage;
     }
 
     /**
@@ -35,6 +52,7 @@ public class SpotifyBean implements Serializable {
      *
      * @param searchArtistName nome do artista
      */
+
     public void setSearchArtistName(String searchArtistName) {
         this.searchArtistName = searchArtistName;
     }
@@ -117,18 +135,27 @@ public class SpotifyBean implements Serializable {
      *
      * @param event blablablabla
      */
-    public void searchArtist(ActionEvent event) {
+    public void searchArtist(ActionEvent event) throws IOException {
+        //Search Artist Albums
         String at = spotifyService.getAccesssToken().getAccessToken();
         response = spotifyService.searchArtist(searchArtistName, at);
         SearchItem si = response.getSearchArtist().getItems().get(0);
         String id = si.getId();
         requestArtistAlbums(at, id);
+
+        // Removes duplicated infos
         for (int i = 0; i <= artistAlbumsList.size() - 1; i++) {
             if (artistAlbumsList.get(i).getName().equals(artistAlbumsList.get(i + 1).getName()) ||
                     artistAlbumsList.get(i).getId().equals(artistAlbumsList.get(i + 1).getId()) ||
                     artistAlbumsList.get(i).getReleaseDate().equals(artistAlbumsList.get(i + 1).getReleaseDate()) ||
                     artistAlbumsList.get(i).getTotalTracks() == artistAlbumsList.get(i + 1).getTotalTracks()) {
                 artistAlbumsList.remove(i + 1);
+
+                //StreamedContent Image from URL
+                URL imageUrl = new URL(artistAlbumsList.get(i).getImages().get(i).getUrl());
+                InputStream is = imageUrl.openStream();
+                String mimeType = URLConnection.guessContentTypeFromStream(is);
+                albumImage = DefaultStreamedContent.builder().contentType(mimeType).build();
             }
         }
     }
