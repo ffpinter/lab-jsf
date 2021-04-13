@@ -135,10 +135,9 @@ public class SpotifyBean implements Serializable {
         SearchItem si = response.getSearchArtist().getItems().get(0);
         String id = si.getId();
         requestArtistAlbums(at, id);
-
+        System.out.println(artistAlbumsList.get(0).getImages().get(0).getUrl());
         // Removes duplicated infos
         for (int i = 0; i <= artistAlbumsList.size() - 1; i++) {
-            System.out.println(artistAlbumsList.get(i).getImages().get(i).getUrl());
             ArtistAlbumsItem currentAlbum = artistAlbumsList.get(i);
             ArtistAlbumsItem nextAlbum = artistAlbumsList.get(i + 1);
             if (currentAlbum.getName().equals(nextAlbum.getName()) || currentAlbum.getId().equals(nextAlbum.getId()) ||
