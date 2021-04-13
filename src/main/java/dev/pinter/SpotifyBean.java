@@ -138,13 +138,20 @@ public class SpotifyBean implements Serializable {
 
         // Removes duplicated infos
         for (int i = 0; i <= artistAlbumsList.size() - 1; i++) {
-            if (artistAlbumsList.get(i).getName().equals(artistAlbumsList.get(i + 1).getName()) ||
-                    artistAlbumsList.get(i).getId().equals(artistAlbumsList.get(i + 1).getId()) ||
-                    artistAlbumsList.get(i).getReleaseDate().equals(artistAlbumsList.get(i + 1).getReleaseDate()) ||
-                    artistAlbumsList.get(i).getTotalTracks() == artistAlbumsList.get(i + 1).getTotalTracks()) {
-                artistAlbumsList.remove(i + 1);
+            System.out.println(artistAlbumsList.get(i).getImages().get(i).getUrl());
+            ArtistAlbumsItem currentAlbum = artistAlbumsList.get(i);
+            ArtistAlbumsItem nextAlbum = artistAlbumsList.get(i + 1);
+            if (currentAlbum.getName().equals(nextAlbum.getName()) || currentAlbum.getId().equals(nextAlbum.getId()) ||
+                    currentAlbum.getReleaseDate().equals(nextAlbum.getReleaseDate()) ||
+                    currentAlbum.getTotalTracks() == nextAlbum.getTotalTracks()) {
+                System.out.println("TESTE DO IF ENORME");
+                artistAlbumsList.remove(nextAlbum);
             }
-            urls.add(artistAlbumsList.get(i).getImages().get(i).getUrl());
+            if (currentAlbum.getName().equals(nextAlbum.getName()) &&
+                    currentAlbum.getReleaseDate().equals(nextAlbum.getReleaseDate())) {
+                System.out.println("TESTE DO IF ENORME2");
+                artistAlbumsList.remove(nextAlbum);
+            }
         }
     }
 
