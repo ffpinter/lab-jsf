@@ -78,6 +78,10 @@ public class GameBean implements Serializable {
         }
         try {
             String mimeType = URLConnection.guessContentTypeFromStream(new ByteArrayInputStream(game.getImg()));
+            System.out.println(DefaultStreamedContent.builder()
+                    .contentType(mimeType).stream(() -> new ByteArrayInputStream(game.getImg())).
+                            build());
+
             return DefaultStreamedContent.builder()
                     .contentType(mimeType).stream(() -> new ByteArrayInputStream(game.getImg())).
                             build();

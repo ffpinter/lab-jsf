@@ -1,18 +1,11 @@
 package dev.pinter;
 
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
-
 import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.ws.rs.NotAuthorizedException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,18 +26,18 @@ public class SpotifyBean implements Serializable {
     private SearchRoot response;
     private List<SearchItem> artists = new ArrayList<>(100000);
     private List<ArtistAlbumsItem> artistAlbumsList = new ArrayList<>(100000);
-    private StreamedContent albumImage;
+    private List<String> urls = new ArrayList<>(100000);
+
+    public List<String> getUrls() {
+        return urls;
+    }
+
+    public void setUrls(List<String> urls) {
+        this.urls = urls;
+    }
 
     public String getSearchArtistName() {
         return searchArtistName;
-    }
-
-    public StreamedContent getAlbumImage() {
-        return albumImage;
-    }
-
-    public void setAlbumImage(StreamedContent albumImage) {
-        this.albumImage = albumImage;
     }
 
     /**
@@ -150,13 +143,8 @@ public class SpotifyBean implements Serializable {
                     artistAlbumsList.get(i).getReleaseDate().equals(artistAlbumsList.get(i + 1).getReleaseDate()) ||
                     artistAlbumsList.get(i).getTotalTracks() == artistAlbumsList.get(i + 1).getTotalTracks()) {
                 artistAlbumsList.remove(i + 1);
-
-                //StreamedContent Image from URL
-                URL imageUrl = new URL(artistAlbumsList.get(i).getImages().get(i).getUrl());
-                InputStream is = imageUrl.openStream();
-                String mimeType = URLConnection.guessContentTypeFromStream(is);
-                albumImage = DefaultStreamedContent.builder().contentType(mimeType).build();
             }
+            urls.add(artistAlbumsList.get(i).getImages().get(i).getUrl());
         }
     }
 

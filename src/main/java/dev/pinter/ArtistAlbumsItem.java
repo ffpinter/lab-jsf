@@ -1,6 +1,7 @@
 package dev.pinter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.primefaces.model.StreamedContent;
 
 import java.util.List;
 
@@ -28,7 +29,6 @@ public class ArtistAlbumsItem extends Album {
 
     @JsonProperty("total_tracks")
     private int totalTracks;
-
 
     public String getAlbumGroup() {
         return albumGroup;

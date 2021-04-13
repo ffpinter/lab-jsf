@@ -3,12 +3,11 @@
   -->
 
 <!DOCTYPE html>
-<html xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns="http://www.w3.org/1999/xhtml">
+<html
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns="http://www.w3.org/1999/xhtml">
 <f:view locale="#{language.current}"/>
 <h:head>
     <h:outputStylesheet library="default" name="css/spotify.css"/>
@@ -73,7 +72,14 @@
                 #{aal.totalTracks}
             </p:column>
         </p:dataTable>
-        <p:graphicImage name="#{spotifyBean.albumImage}" library="images"/>
+    </h:form>
+    <h:form>
+        <p:carousel value="#{spotifyBean.artistAlbumsList}" var="aal">
+            <p:graphicImage url="#{spotifyBean.urls}"
+                            alt="Descijasdkja"
+                            title="Album"/>
+        </p:carousel>
     </h:form>
 </h:body>
 </html>
+
