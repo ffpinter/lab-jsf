@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -110,6 +111,19 @@ public class Album {
 
     public void setAvailableMarkets(List<String> availableMarkets) {
         this.availableMarkets = availableMarkets;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Album album = (Album) o;
+        return name.equals(album.name) && id.equals(album.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, releaseDate);
     }
 
     @Override

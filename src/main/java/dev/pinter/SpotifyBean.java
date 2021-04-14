@@ -7,7 +7,10 @@ import javax.ws.rs.NotAuthorizedException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Bean do spotify
@@ -119,8 +122,12 @@ public class SpotifyBean implements Serializable {
 
     public void requestArtistAlbums(String at, String id) {
         ArtistAlbumsRoot aar = spotifyService.getArtistAlbums(at, id);
-        artistAlbumsList = aar.getItemsList();
-        System.out.println(aar);
+        artistAlbumsList = aar.getItemsList().stream().distinct().collect(Collectors.toList());
+        artistAlbumsList.sort(Comparator.comparing(Album::getName));
+
+        HashMap<String,Album> albums = new HashMap<>();
+        aar.getItemsList().forEach(f -> { albums.put(f.getName(),f); });
+        System.out.println(albums);
     }
 
     /**
@@ -135,23 +142,26 @@ public class SpotifyBean implements Serializable {
         SearchItem si = response.getSearchArtist().getItems().get(0);
         String id = si.getId();
         requestArtistAlbums(at, id);
-        System.out.println(artistAlbumsList.get(0).getImages().get(0).getUrl());
+
+//        artistAlbumsList.sort(Comparator.comparing(Album::getName));
+//        List<ArtistAlbumsItem> albumsList = artistAlbumsList.stream().distinct().collect(Collectors.toList());
         // Removes duplicated infos
-        for (int i = 0; i <= artistAlbumsList.size() - 1; i++) {
-            ArtistAlbumsItem currentAlbum = artistAlbumsList.get(i);
-            ArtistAlbumsItem nextAlbum = artistAlbumsList.get(i + 1);
-            if (currentAlbum.getName().equals(nextAlbum.getName()) || currentAlbum.getId().equals(nextAlbum.getId()) ||
-                    currentAlbum.getReleaseDate().equals(nextAlbum.getReleaseDate()) ||
-                    currentAlbum.getTotalTracks() == nextAlbum.getTotalTracks()) {
-                System.out.println("TESTE DO IF ENORME");
-                artistAlbumsList.remove(nextAlbum);
-            }
-            if (currentAlbum.getName().equals(nextAlbum.getName()) &&
-                    currentAlbum.getReleaseDate().equals(nextAlbum.getReleaseDate())) {
-                System.out.println("TESTE DO IF ENORME2");
-                artistAlbumsList.remove(nextAlbum);
-            }
-        }
+//        for (int i = 0; i < artistAlbumsList.size(); i++) {
+//            System.out.println(artistAlbumsList.get(i).getImages().get(i).getUrl());
+//            ArtistAlbumsItem currentAlbum = artistAlbumsList.get(i);
+//            ArtistAlbumsItem nextAlbum = artistAlbumsList.get(i + 1);
+//            if (currentAlbum.getName().equals(nextAlbum.getName()) || currentAlbum.getId().equals(nextAlbum.getId()) ||
+//                    currentAlbum.getReleaseDate().equals(nextAlbum.getReleaseDate()) ||
+//                    currentAlbum.getTotalTracks() == nextAlbum.getTotalTracks()) {
+//                System.out.println("TESTE DO IF ENORME");
+//                artistAlbumsList.remove(nextAlbum);
+//            }
+//            if (currentAlbum.getName().equals(nextAlbum.getName()) &&
+//                    currentAlbum.getReleaseDate().equals(nextAlbum.getReleaseDate())) {
+//                System.out.println("TESTE DO IF ENORME2");
+//                artistAlbumsList.remove(nextAlbum);
+//            }
+//        }
     }
 
     public String strList(List<String> genres) {
